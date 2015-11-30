@@ -1,0 +1,30 @@
+body {
+    font-family: sans-serif;
+    font-size: 10pt;
+}
+.comment {
+    margin: 5px 0px;
+}
+.commentAuthor, .commentText{
+    display: inline-block;
+}
+.commentText > p {
+    display: inline;
+}
+.commentAuthor {
+    margin-right: 5px;
+    background-color: blueviolet;
+    color: lightyellow;
+    padding: 1px 2px;
+    border-radius: 2px;
+}
+.comment button {
+    margin-left: 10px
+}
+.commentForm {
+    margin: 15px 0px;
+}
+.commentForm input[type="text"] {
+    margin-right: 2px;
+    font-size: 1.1em;
+}

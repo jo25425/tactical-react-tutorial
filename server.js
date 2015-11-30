@@ -62,6 +62,34 @@ app.post('/api/comments', function(req, res) {
   });
 });
 
+app.delete('/api/comments', function(req, res) {
+  fs.readFile(COMMENTS_FILE, function(err, data) {
+    if (err) {
+      console.error(err);
+      process.exit(1);
+    }
+    var comments = JSON.parse(data);
+    comments.splice(comments.findIndex(c => c.id == req.body.id ), 1);
+
+    // var newComment = {
+    //   id: Date.now(),
+    //   author: req.body.author,
+    //   text: req.body.text,
+    // };
+    // comments.push(newComment);
+
+
+    fs.writeFile(COMMENTS_FILE, JSON.stringify(comments, null, 4), function(err) {
+      if (err) {
+        console.error(err);
+        process.exit(1);
+      }
+      res.setHeader('Cache-Control', 'no-cache');
+      res.json(comments);
+    });
+  });
+});
+
 
 app.listen(app.get('port'), function() {
   console.log('Server started: http://localhost:' + app.get('port') + '/');
