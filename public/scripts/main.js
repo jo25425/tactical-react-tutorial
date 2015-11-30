@@ -48,19 +48,21 @@ var CommentForm = React.createClass({
         return { author: '', text: '' };
     },
     handleAuthorChange: function(e) {
-        this.setState({ author: e.target.value.trim() });
+        this.setState({ author: e.target.value });
     },
     handleTextChange: function(e) {
-        this.setState({ text: e.target.value.trim() });
+        this.setState({ text: e.target.value });
     },
     handleSubmit: function(e) {
         e.preventDefault();
-        if (!this.state.text || !this.state.author) {
+        var text = this.state.text.trim();
+        var author = this.state.author.trim();
+        if (!text || !author) {
             return;
         }
 
         // Post new data to server through parent callback
-        this.props.onCommentSubmit(this.state);
+        this.props.onCommentSubmit({ author: author, text: text });
 
         // Clear the form
         this.setState(this.getInitialState());
